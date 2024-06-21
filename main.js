@@ -48,4 +48,26 @@ document.addEventListener('fullscreenchange', () => {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const counterElement = document.getElementById("counter");
+    const messageElement = document.getElementById("recaptcha-container");
+    const messageElementText = document.getElementById("text-captcha");
+
+    let seconds = 3;
+
+    function updateCounter() {
+        counterElement.textContent = "Please allow up to " + seconds + " seconds...";
+        seconds--;
+
+        if (seconds < 0) {
+            clearInterval(interval);
+            counterElement.style.display = "none";
+            messageElement.style.display = "flex";
+            messageElementText.style.display = "flex"
+        }
+    }
+
+    updateCounter();
+    const interval = setInterval(updateCounter, 1000);
+});
 
